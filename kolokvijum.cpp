@@ -8,6 +8,7 @@
  */
 
 #include <stdlib.h>
+#include <math.h>
 #include <stdio.h>
 #include "GL/glut.h"	// OpenGL Graphics Utility Library
 #include "kolokvijum_header.h"
@@ -22,7 +23,10 @@ bool isKeyRightPressed = false;
 bool isKeyUpPressed = false;
 bool isKeyDownPressed = false;
 
+
+
 float size= 0.07;
+
 
 float Xsize1=9.63, Ysize1=11.27;
 float Xsize2=3.89, Ysize2=7.31;
@@ -64,6 +68,9 @@ float ug = 0.0;
 float animation = 10;
 int RunMode = 1;
 
+
+
+
 void drawQuad(float Xsize, float Ysize) {
     int numOfCopies = 100;
     float distanceBetweenCopies = 08.0;
@@ -101,6 +108,7 @@ void drawQuad(float Xsize, float Ysize) {
     }
 }
 
+
 void drawPlane2() {
     // plane 1
     glBegin(GL_TRIANGLES);
@@ -109,6 +117,7 @@ void drawPlane2() {
     glVertex3f(11.0 + XsizeP1, 1.0 + YsizeP1, 0.0);
     glVertex3f(10.75 + XsizeP1, 1.25 + YsizeP1, 0.0);
     glEnd();
+    
 }
 
 void drawPlane1() {
@@ -219,25 +228,49 @@ void keyUpSpecial(int key, int x, int y) {
 void handleMovement() {
     float increment = 0.005; // Higher increment value for faster movement
 
-    if (isKeyAPressed)
+    // Handling AWSD keys
+    if (isKeyAPressed) {
         XsizeP2 -= increment; // Move left
-    if (isKeyDPressed)
+    }
+    if (isKeyDPressed) {
         XsizeP2 += increment; // Move right
-    if (isKeyWPressed)
+    }
+    if (isKeyWPressed) {
         YsizeP2 += increment; // Move up
-    if (isKeySPressed)
+    }
+    if (isKeySPressed) {
         YsizeP2 -= increment; // Move down
+    }
 
-        // Handling arrow keys
-    if (isKeyLeftPressed)
+    // Handling arrow keys
+    if (isKeyLeftPressed) {
         XsizeP1 -= increment; // Move left
-    if (isKeyRightPressed)
+    }
+    if (isKeyRightPressed) {
         XsizeP1 += increment; // Move right
-    if (isKeyUpPressed)
+    }
+    if (isKeyUpPressed) {
         YsizeP1 += increment; // Move up
-    if (isKeyDownPressed)
+    }
+    if (isKeyDownPressed) {
         YsizeP1 -= increment; // Move down
-}
+    }
+
+    // Restarting to original positions
+    if (YsizeP2 < -0.5 || YsizeP2 > 13.2) {
+        XsizeP2 = 0.0;
+        YsizeP2 = 0.0;
+        
+    }
+    if(YsizeP1 < -0.5 || YsizeP1 > 13.2){
+        XsizeP1 = 0.0;
+        YsizeP1 = 0.0;
+    }
+
+   
+   
+ }
+
 
 /*
  * drawScene() handles the animation and the redrawing of the
