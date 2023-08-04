@@ -17,6 +17,11 @@ bool isKeyDPressed = false;
 bool isKeyWPressed = false;
 bool isKeySPressed = false;
 
+bool isKeyLeftPressed = false;
+bool isKeyRightPressed = false;
+bool isKeyUpPressed = false;
+bool isKeyDownPressed = false;
+
 float size= 0.07;
 
 float Xsize1=9.63, Ysize1=11.27;
@@ -174,6 +179,43 @@ void keyUp(unsigned char key, int x, int y) {
     }
 }
 
+
+void mySpecialKeyFunc(int key, int x, int y) {
+    switch (key) {
+    case GLUT_KEY_LEFT:
+        isKeyLeftPressed = true;
+        break;
+    case GLUT_KEY_RIGHT:
+        isKeyRightPressed = true;
+        break;
+    case GLUT_KEY_UP:
+        isKeyUpPressed = true;
+        break;
+    case GLUT_KEY_DOWN:
+        isKeyDownPressed = true;
+        break;
+    }
+
+    glutPostRedisplay();
+}
+void keyUpSpecial(int key, int x, int y) {
+    switch (key) {
+    case GLUT_KEY_LEFT:
+        isKeyLeftPressed = false;
+        break;
+    case GLUT_KEY_RIGHT:
+        isKeyRightPressed = false;
+        break;
+    case GLUT_KEY_UP:
+        isKeyUpPressed = false;
+        break;
+    case GLUT_KEY_DOWN:
+        isKeyDownPressed = false;
+        break;
+    }
+}
+
+
 void handleMovement() {
     float increment = 0.005; // Higher increment value for faster movement
 
@@ -185,25 +227,16 @@ void handleMovement() {
         YsizeP2 += increment; // Move up
     if (isKeySPressed)
         YsizeP2 -= increment; // Move down
-}
 
-void mySpecialKeyFunc(int key, int x, int y) {
-    switch (key) {
-    case GLUT_KEY_UP:
-        YsizeP1 += 0.1;
-        break;
-    case GLUT_KEY_DOWN:
-        YsizeP1 -= 0.1;
-        break;
-    case GLUT_KEY_LEFT:
-        XsizeP1 -= 0.1;
-        break;
-    case GLUT_KEY_RIGHT:
-        XsizeP1 += 0.1;
-        break;
-    }
-
-    glutPostRedisplay();
+        // Handling arrow keys
+    if (isKeyLeftPressed)
+        XsizeP1 -= increment; // Move left
+    if (isKeyRightPressed)
+        XsizeP1 += increment; // Move right
+    if (isKeyUpPressed)
+        YsizeP1 += increment; // Move up
+    if (isKeyDownPressed)
+        YsizeP1 -= increment; // Move down
 }
 
 /*
@@ -386,9 +419,10 @@ int main( int argc, char** argv )
 	initRendering();
 
 	// Set up callback functions for key presses
-	glutKeyboardFunc( myKeyboardFunc );			// Handles "normal" ascii symbols
-	glutSpecialFunc(mySpecialKeyFunc);  // Handles "special" keyboard keys
-	glutKeyboardUpFunc(keyUp);
+	glutKeyboardFunc(myKeyboardFunc);     // Handles "normal" ascii symbols
+glutKeyboardUpFunc(keyUp);            // Handles key release
+glutSpecialFunc(mySpecialKeyFunc);    // Handles arrow keys
+glutSpecialUpFunc(keyUpSpecial);
 
 	// Set up the callback function for resizing windows
 	glutReshapeFunc( resizeWindow );
