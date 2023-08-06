@@ -88,6 +88,8 @@ float XspeedT = 0.00005;
 
 int counter1 = 0;
 int counter2 = 0;
+int countdown1 = 3;
+int countdown2 = 3;
 
 float Xspeed = 0.001;
 float ug = 0.0;
@@ -315,7 +317,7 @@ void drawPlane1() {
     glEnd();
 }
 bool checkCollision(float quadX, float quadY, float quadSize,
-                    float planeX, float planeY) {
+                    float planeX, float planeY, int num) {
     // Calculate the bounding boxes for the quad and the plane
     float quadMinX = quadX - quadSize / 2;
     float quadMaxX = quadX + quadSize / 2;
@@ -327,9 +329,35 @@ bool checkCollision(float quadX, float quadY, float quadSize,
     float planeMinY = planeY;
     float planeMaxY = planeY + 0.25; // Adjust as per the actual bounding box of the plane
 
+
+   
     // Check for overlap
     if (quadMinX < planeMaxX && quadMaxX > planeMinX &&
         quadMinY < planeMaxY && quadMaxY > planeMinY) {
+        if(num == 1){
+        XsizeP1 = 0.0;
+        YsizeP1= 0.0;
+        countdown2--;
+        }
+        else{
+        XsizeP2 = 0.0;
+        YsizeP2 = 0.0;
+        countdown1--;
+        }
+        if(countdown1 == 0 || countdown2 == 0){
+            XsizeP1 = 0.0;
+            YsizeP1= 0.0;
+            XsizeP2 = 0.0;
+            YsizeP2= 0.0;
+            countdown1 = 3;
+            countdown2 = 3;
+            counter1 = 0;
+            counter2 = 0;
+            YsizeT = 13;
+            XsizeT = 0;
+
+        }
+        
         // Collision detected
         return true;
     }
@@ -338,7 +366,74 @@ bool checkCollision(float quadX, float quadY, float quadSize,
     return false;
 }
 
-
+void livesone(int counter){
+    switch (counter) {
+        case 1:
+            glBegin(GL_LINES);
+            glVertex2f(7.25, 11.5f);
+            glVertex2f(7.25f, 12.5f);
+            glEnd();
+            break;
+        case 2:
+            glBegin(GL_LINE_STRIP);
+            glVertex2f(7.5f, 11.5f);
+            glVertex2f(7.0f, 11.5f);
+            glVertex2f(7.0f, 12.0f);
+            glVertex2f(7.5f, 12.0f);
+            glVertex2f(7.5f, 12.5f);
+            glVertex2f(7.0f, 12.5f);
+            glEnd();
+            break;
+        case 3:
+            glBegin(GL_LINE_STRIP);
+            glVertex2f(7.0f, 11.5f);
+            glVertex2f(7.5f, 11.5f);
+            glVertex2f(7.5f, 12.5f);
+            glVertex2f(7.0f, 12.5f);
+            glEnd();
+            glBegin(GL_LINES);
+            glVertex2f(7.0f, 12.0f);
+            glVertex2f(7.5f, 12.0f);
+            glEnd();
+            break;
+        default:
+            break;
+    }
+}
+void livestwo(int counter){
+    switch (counter) {
+        case 1:
+            glBegin(GL_LINES);
+            glVertex2f(16.75, 11.5f);
+            glVertex2f(16.75f, 12.5f);
+            glEnd();
+            break;
+        case 2:
+            glBegin(GL_LINE_STRIP);
+            glVertex2f(17, 11.5f);
+            glVertex2f(16.5, 11.5f);
+            glVertex2f(16.5, 12.0f);
+            glVertex2f(17, 12.0f);
+            glVertex2f(17, 12.5f);
+            glVertex2f(16.5, 12.5f);
+            glEnd();
+            break;
+        case 3:
+            glBegin(GL_LINE_STRIP);
+            glVertex2f(16.5, 11.5f);
+            glVertex2f(17, 11.5f);
+            glVertex2f(17, 12.5f);
+            glVertex2f(16.5, 12.5f);
+            glEnd();
+            glBegin(GL_LINES);
+            glVertex2f(16.5, 12.0f);
+            glVertex2f(17, 12.0f);
+            glEnd();
+            break;
+        default:
+            break;
+    }
+}
 void Counter1(int counter){
     switch (counter) {
         case 0:
@@ -819,25 +914,161 @@ void drawScene(void) {
         YsizeP2 = 0.0;
         counter1 = 0;
         counter2 = 0;
+        countdown1 = 3;
+        countdown2 = 3;
     }
- 
-     // Perform collision detection
-    bool collision2 = checkCollision(Xsize1, Ysize1, size, 7.25 + XsizeP2, 2.0 + YsizeP2);
-    bool collision1 = checkCollision(Xsize1, Ysize1, size, 16.75 + XsizeP1, 2.0 + YsizeP1);
-    // Handle collisions (you can customize this part as needed)
-    if (collision1) {
-        // Do something for collision with plane 1
-        printf("Collision");
-        XsizeP1 = 0.0;
-        YsizeP1 = 0.0;
-    }
+    checkCollision(Xsize1, Ysize1, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize1, Ysize1, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
 
-    if (collision2) {
-        // Do something for collision with plane 2
-        printf("Collision");
-        XsizeP2 = 0.0;
-        YsizeP2 = 0.0;
-    }
+    checkCollision(Xsize2, Ysize2, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize2, Ysize2, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize3, Ysize3, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize3, Ysize3, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize4, Ysize4, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize4, Ysize4, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize5, Ysize5, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize5, Ysize5, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize6, Ysize6, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize6, Ysize6, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize7, Ysize7, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize7, Ysize7, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize8, Ysize8, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize8, Ysize8, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize9, Ysize9, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize9, Ysize9, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize10, Ysize10, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize10, Ysize10, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize11, Ysize11, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize11, Ysize11, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize12, Ysize12, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize12, Ysize12, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize13, Ysize13, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize13, Ysize13, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize14, Ysize14, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize14, Ysize14, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize15, Ysize15, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize15, Ysize15, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize16, Ysize16, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize16, Ysize16, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize17, Ysize17, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize17, Ysize17, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize18, Ysize18, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize18, Ysize18, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize19, Ysize19, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize19, Ysize19, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize20, Ysize20, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize20, Ysize20, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize21, Ysize21, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize21, Ysize21, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize22, Ysize22, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize22, Ysize22, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize23, Ysize23, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize23, Ysize23, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize24, Ysize24, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize24, Ysize24, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize25, Ysize25, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize25, Ysize25, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize26, Ysize26, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize26, Ysize26, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+    
+    checkCollision(Xsize27, Ysize27, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize27, Ysize27, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize28, Ysize28, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize28, Ysize28, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize29, Ysize29, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize29, Ysize29, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize30, Ysize30, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize30, Ysize30, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize31, Ysize31, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize31, Ysize31, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize32, Ysize32, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize32, Ysize32, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize33, Ysize33, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize33, Ysize33, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize34, Ysize34, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize34, Ysize34, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize35, Ysize35, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize35, Ysize35, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize36, Ysize36, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize36, Ysize36, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize37, Ysize37, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize37, Ysize37, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize38, Ysize38, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize38, Ysize38, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize39, Ysize39, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize39, Ysize39, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize40, Ysize40, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize40, Ysize40, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize41, Ysize41, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize41, Ysize41, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize42, Ysize42, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize42, Ysize42, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize43, Ysize43, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize43, Ysize43, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize44, Ysize44, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize44, Ysize44, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize45, Ysize45, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize45, Ysize45, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize46, Ysize46, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize46, Ysize46, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize47, Ysize47, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize47, Ysize47, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize48, Ysize48, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize48, Ysize48, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize49, Ysize49, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize49, Ysize49, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+
+    checkCollision(Xsize50, Ysize50, size, 7.25 + XsizeP2, 2.0 + YsizeP2, 2);
+    checkCollision(Xsize50, Ysize50, size, 16.75 + XsizeP1, 2.0 + YsizeP1, 1);
+    livesone(countdown1);
+    livestwo(countdown2);
+    
 
     // Flush the pipeline.  (Not usually necessary.)
     glFlush();
