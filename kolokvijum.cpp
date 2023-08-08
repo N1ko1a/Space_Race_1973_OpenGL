@@ -369,31 +369,69 @@ bool checkCollision(float quadX, float quadY, float quadSize,
 void livesone(int counter){
     switch (counter) {
         case 1:
-            glBegin(GL_LINES);
-            glVertex2f(7.25, 11.5f);
-            glVertex2f(7.25f, 12.5f);
+            glBegin(GL_POLYGON);
+            glVertex2f(0.25, 12.25f);
+            glVertex2f(0.5, 12.5f);
+            glVertex2f(0.40, 12.75f);
+            glVertex2f(0.30, 12.75f);
+            glVertex2f(0.25, 12.65f);
+            glVertex2f(0.20, 12.75f);
+            glVertex2f(0.10, 12.75f);
+            glVertex2f(0.0, 12.5f);
             glEnd();
             break;
         case 2:
-            glBegin(GL_LINE_STRIP);
-            glVertex2f(7.5f, 11.5f);
-            glVertex2f(7.0f, 11.5f);
-            glVertex2f(7.0f, 12.0f);
-            glVertex2f(7.5f, 12.0f);
-            glVertex2f(7.5f, 12.5f);
-            glVertex2f(7.0f, 12.5f);
+            glBegin(GL_POLYGON);
+            glVertex2f(0.25, 12.25f);
+            glVertex2f(0.5, 12.5f);
+            glVertex2f(0.40, 12.75f);
+            glVertex2f(0.30, 12.75f);
+            glVertex2f(0.25, 12.65f);
+            glVertex2f(0.20, 12.75f);
+            glVertex2f(0.10, 12.75f);
+            glVertex2f(0.0, 12.5f);
+            glEnd();
+            glBegin(GL_POLYGON);
+            glVertex2f(1.25, 12.25f);
+            glVertex2f(1.5, 12.5f);
+            glVertex2f(1.40, 12.75f);
+            glVertex2f(1.30, 12.75f);
+            glVertex2f(1.25, 12.65f);
+            glVertex2f(1.20, 12.75f);
+            glVertex2f(1.10, 12.75f);
+            glVertex2f(1.0, 12.5f);
             glEnd();
             break;
         case 3:
-            glBegin(GL_LINE_STRIP);
-            glVertex2f(7.0f, 11.5f);
-            glVertex2f(7.5f, 11.5f);
-            glVertex2f(7.5f, 12.5f);
-            glVertex2f(7.0f, 12.5f);
+            glBegin(GL_POLYGON);
+            glVertex2f(0.25, 12.25f);
+            glVertex2f(0.5, 12.5f);
+            glVertex2f(0.40, 12.75f);
+            glVertex2f(0.30, 12.75f);
+            glVertex2f(0.25, 12.65f);
+            glVertex2f(0.20, 12.75f);
+            glVertex2f(0.10, 12.75f);
+            glVertex2f(0.0, 12.5f);
             glEnd();
-            glBegin(GL_LINES);
-            glVertex2f(7.0f, 12.0f);
-            glVertex2f(7.5f, 12.0f);
+            glBegin(GL_POLYGON);
+            glVertex2f(1.25, 12.25f);
+            glVertex2f(1.5, 12.5f);
+            glVertex2f(1.40, 12.75f);
+            glVertex2f(1.30, 12.75f);
+            glVertex2f(1.25, 12.65f);
+            glVertex2f(1.20, 12.75f);
+            glVertex2f(1.10, 12.75f);
+            glVertex2f(1.0, 12.5f);
+            glEnd();
+            glBegin(GL_POLYGON);
+            glVertex2f(2.25, 12.25f);
+            glVertex2f(2.5, 12.5f);
+            glVertex2f(2.40, 12.75f);
+            glVertex2f(2.30, 12.75f);
+            glVertex2f(2.25, 12.65f);
+            glVertex2f(2.20, 12.75f);
+            glVertex2f(2.10, 12.75f);
+            glVertex2f(2.0, 12.5f);
             glEnd();
             break;
         default:
@@ -403,33 +441,70 @@ void livesone(int counter){
 void livestwo(int counter){
     switch (counter) {
         case 1:
-            glBegin(GL_LINES);
-            glVertex2f(16.75, 11.5f);
-            glVertex2f(16.75f, 12.5f);
+            glBegin(GL_POLYGON);
+            glVertex2f(21.65, 12.25f);
+            glVertex2f(21.9, 12.5f);
+            glVertex2f(21.80, 12.75f);
+            glVertex2f(21.70, 12.75f);
+            glVertex2f(21.65, 12.65f);
+            glVertex2f(21.60, 12.75f);
+            glVertex2f(21.50, 12.75f);
+            glVertex2f(21.40, 12.5f);
             glEnd();
             break;
         case 2:
-            glBegin(GL_LINE_STRIP);
-            glVertex2f(17, 11.5f);
-            glVertex2f(16.5, 11.5f);
-            glVertex2f(16.5, 12.0f);
-            glVertex2f(17, 12.0f);
-            glVertex2f(17, 12.5f);
-            glVertex2f(16.5, 12.5f);
+            glBegin(GL_POLYGON);
+            glVertex2f(21.65, 12.25f);
+            glVertex2f(21.9, 12.5f);
+            glVertex2f(21.80, 12.75f);
+            glVertex2f(21.70, 12.75f);
+            glVertex2f(21.65, 12.65f);
+            glVertex2f(21.60, 12.75f);
+            glVertex2f(21.50, 12.75f);
+            glVertex2f(21.40, 12.5f);
+            glEnd();
+            glBegin(GL_POLYGON);
+            glVertex2f(22.65, 12.25f);
+            glVertex2f(22.9, 12.5f);
+            glVertex2f(22.80, 12.75f);
+            glVertex2f(22.70, 12.75f);
+            glVertex2f(22.65, 12.65f);
+            glVertex2f(22.60, 12.75f);
+            glVertex2f(22.50, 12.75f);
+            glVertex2f(22.40, 12.5f);
             glEnd();
             break;
         case 3:
-            glBegin(GL_LINE_STRIP);
-            glVertex2f(16.5, 11.5f);
-            glVertex2f(17, 11.5f);
-            glVertex2f(17, 12.5f);
-            glVertex2f(16.5, 12.5f);
+            glBegin(GL_POLYGON);
+            glVertex2f(21.65, 12.25f);
+            glVertex2f(21.9, 12.5f);
+            glVertex2f(21.80, 12.75f);
+            glVertex2f(21.70, 12.75f);
+            glVertex2f(21.65, 12.65f);
+            glVertex2f(21.60, 12.75f);
+            glVertex2f(21.50, 12.75f);
+            glVertex2f(21.40, 12.5f);
             glEnd();
-            glBegin(GL_LINES);
-            glVertex2f(16.5, 12.0f);
-            glVertex2f(17, 12.0f);
+            glBegin(GL_POLYGON);
+            glVertex2f(22.65, 12.25f);
+            glVertex2f(22.9, 12.5f);
+            glVertex2f(22.80, 12.75f);
+            glVertex2f(22.70, 12.75f);
+            glVertex2f(22.65, 12.65f);
+            glVertex2f(22.60, 12.75f);
+            glVertex2f(22.50, 12.75f);
+            glVertex2f(22.40, 12.5f);
             glEnd();
-            break;
+            glBegin(GL_POLYGON);
+            glVertex2f(23.65, 12.25f);
+            glVertex2f(23.9, 12.5f);
+            glVertex2f(23.80, 12.75f);
+            glVertex2f(23.70, 12.75f);
+            glVertex2f(23.65, 12.65f);
+            glVertex2f(23.60, 12.75f);
+            glVertex2f(23.50, 12.75f);
+            glVertex2f(23.40, 12.5f);
+            glEnd();
         default:
             break;
     }
@@ -699,8 +774,7 @@ void drawScene(void) {
     Xsize1 = Xsize1 - Xspeeds[0];
     if (Xsize1 - size <= Xmin-1 || Xsize1 + size >= Xmax+1) Xspeeds[0] = -Xspeeds[0]; // Reverse the direction
     drawQuad(Xsize1, Ysize1);
-
-	Xsize2 = Xsize2 - Xspeeds[1];
+    Xsize2 = Xsize2 - Xspeeds[1];
     if (Xsize2 - size <= Xmin-1 || Xsize2 + size >= Xmax+1) Xspeeds[1] = -Xspeeds[1]; // Reverse the direction
     drawQuad(Xsize2, Ysize2);
 
